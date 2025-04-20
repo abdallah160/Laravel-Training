@@ -3,21 +3,7 @@ body{
     background-color: #ececec;
     color: rgb(44, 44, 44);
 }
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 50px 0px 50px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.253);
-    z-index: 10;
-    position: relative;
-}
-.navbar button{
-    background: none;
-    border-radius: 4px;
-    width: 100px;
-    height: 50px;
-    
-}
+
 .pages{
     margin-top: 5px;
 }
@@ -99,4 +85,56 @@ body{
 }
 .footer p {
     margin: 10px 0;
+}
+
+@media (max-width: 1200px) {
+    .first-section, .work-container {
+        margin: 40px 100px 20px 100px;
+        padding: 20px 100px 20px 100px;
+    }
+    .cover-title h1, .cover-title p {
+        left: 10%;
+    }
+}
+
+@media (max-width: 1280px) {
+    
+
+  
+    .cover-title h1, .cover-title p {
+        font-size: 1.5rem;
+        left: 5%;
+    }
+    .first-section, .work-container {
+        margin: 20px;
+        padding: 20px;
+    }
+    .work-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    .work-card {
+        max-width: 310px;
+    }
+    .work-card img{
+       width: 310px;
+    }
+    .second-section h2{
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .second-section h2{
+        margin-left: 30px;
+    }
+    .cover-title h1, .cover-title p {
+        font-size: 1.2rem;
+    }
+    .footer {
+        font-size: 0.9rem;
+    }
 }
