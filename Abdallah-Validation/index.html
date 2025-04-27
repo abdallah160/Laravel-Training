@@ -15,40 +15,85 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="InputName1" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="InputName1" autocomplete="given-name">
+                            <input type="text" class="form-control" id="InputName1" autocomplete="given-name" required>
                         </div>
 
                         <div class="col">
                             <label for="InputName2" class="form-label">Family Name</label>
-                            <input type="text" class="form-control" id="InputName2" autocomplete="family-name">
+                            <input type="text" class="form-control" id="InputName2" autocomplete="family-name" required>
                         </div>
                     </div>
 
                     <div class="mb-3" >
                         <label for="InputEmail" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" required>
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        <p class="text-danger" id="EmailMessage"></p>
                     </div>
 
                     <div class="mb-3">
                         <label for="InputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="InputPassword1">
+                        <input type="password" class="form-control" id="InputPassword1" required>
+                        <p class="text-danger" id="PasswordMessage"></p>
                     </div>
 
                     <div class="mb-3">
                         <label for="InputPassword2" class="form-label">Repeat Password</label>
-                        <input type="password" class="form-control" id="InputPassword2">
+                        <input type="password" class="form-control" id="InputPassword2" required>
+                        <p class="text-danger" id="RepeatPasswordMessage"></p>
                     </div>
 
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="Check1">
                         <label class="form-check-label" for="Check1">I Accept <a href="#">Terms & Policies</a> of the Webiste</label>
+                        <p class="text-danger" id="CheckMessage"></p>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Sign up</button>
+                    <button type="submit" class="btn btn-primary" id="SignUpButton">Sign up</button>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        let button = document.getElementById("SignUpButton");
+        let emailMessage = document.getElementById("EmailMessage");
+        let passwordMessage = document.getElementById("PasswordMessage");
+        let repeatPasswordMessage = document.getElementById("RepeatPasswordMessage");
+        let checkMessage = document.getElementById("CheckMessage");
+
+        button.addEventListener("click", (event)=>{
+            emailMessage.innerHTML ='';
+            passwordMessage.innerHTML ='';
+            repeatPasswordMessage.innerHTML = '';
+            checkMessage.innerHTML ='';
+    
+            let AcceptsTerms = document.getElementById("Check1").checked;
+            if(!AcceptsTerms){
+                checkMessage.innerHTML = "* You must accept our terms and policies first"
+                event.preventDefault();
+            }
+
+            let password = document.getElementById("InputPassword1").value
+            let passwordHasUpperCase = /[A-Z]/.test(password);
+            let passwordHasLowerCase = /[a-z]/.test(password);
+            let passwordHasSpecialChar = /[!@#\$%\^\&*\)\(+=._-]/.test(password);
+            if (password.length < 8 ||!passwordHasUpperCase || !passwordHasLowerCase || !passwordHasSpecialChar) {
+                passwordMessage.innerHTML = "* Password must contain at least 8 digits, one uppercase letter, one lowercase letter and one special character (!@#$%^&*)";
+                event.preventDefault();
+
+            }
+
+            let repeatedPassword = document.getElementById("InputPassword2").value
+            if(repeatedPassword!=password){
+                repeatPasswordMessage.innerHTML = "* Repeated Password isn't the same as password";
+                event.preventDefault();
+            }
+
+            let email = document.getElementById("InputEmail").value
+            if(email.length >50) {
+                emailMessage.innerHTML = "* Email is too long"
+            }
+        } )
+    </script>
 </body>
 </html>
